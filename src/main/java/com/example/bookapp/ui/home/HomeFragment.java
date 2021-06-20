@@ -6,11 +6,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -22,6 +27,7 @@ import com.example.bookapp.R;
 import com.example.bookapp.books_class.The_Book;
 import com.example.bookapp.databinding.FragmentHomeBinding;
 import com.example.bookapp.fin.Single_one;
+import com.example.bookapp.fin.recycler_Adpter_HORIZONTAL;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
@@ -41,13 +47,19 @@ public class HomeFragment extends Fragment {
 
     The_Book the_book = new The_Book();
 
+    boolean is_call = false;
+
     RequestQueue requestQueue;
     RequestQueue requestQueue2;
+
+
 
     String URL_JSON = "";
     String the_AVG_now = "";
 
     private Single_one single_one;
+
+    ArrayList<The_Book> COMPUTERS_array = new ArrayList<>();
 
 
     String[] Subject_Headings = new String[]{"ANTIQUES & COLLECTIBLES",
@@ -64,20 +76,15 @@ public class HomeFragment extends Fragment {
             "DESIGN",
             "DRAMA",
             "EDUCATION",
-            "FAMILY & RELATIONSHIPS",
             "FICTION",
             "FOREIGN LANGUAGE STUDY",
-            "GAMES & ACTIVITIES",
             "GARDENING",
             "HEALTH & FITNESS",
             "HISTORY",
             "HOUSE & HOME",
             "HUMOR",
             "JUVENILE FICTION",
-            "JUVENILE NONFICTION",
-            "LANGUAGE ARTS & DISCIPLINES",
-            "LAW",
-            "LITERARY COLLECTIONS"};
+            "LANGUAGE ARTS & DISCIPLINES"};
 
 
     private FragmentHomeBinding binding;
@@ -110,10 +117,12 @@ public class HomeFragment extends Fragment {
     private void getBooks() {
         single_one = Single_one.getInstance();
         URL_JSON = single_one.getJsonURL();
-        Random r=new Random();
-        int randomNumber=r.nextInt(Subject_Headings.length);
-        String the_random = Subject_Headings[randomNumber];
-        URL_JSON = "https://www.googleapis.com/books/v1/volumes?q=subject:"+the_random;
+        // todo the random movie
+//        Random r=new Random();
+//        int randomNumber=r.nextInt(Subject_Headings.length);
+//        String the_random = Subject_Headings[randomNumber];
+        String the_random = "COMPUTERS";
+        URL_JSON = "https://www.googleapis.com/books/v1/volumes?q=subject:"+the_random+"&maxResults=10";
 
 
         Log.d("URLS", "getBooks: " + URL_JSON);
@@ -172,7 +181,7 @@ public class HomeFragment extends Fragment {
                                     Log.d("1countaut", "onResponse: "+the_count_authors);
 
                                 }catch (Exception e){
-                                    the_authors ="nune";
+                                    the_authors ="none";
                                     e.printStackTrace();
                                 }
 
@@ -266,15 +275,29 @@ public class HomeFragment extends Fragment {
 //                                Log.d("1ratingsCount", "onResponse: "+ the_ratingsCount);
 
                                 // get infoLink
-                                String the_infoLink = thevolumeInfo.getString("infoLink");
-                                Log.d("1infoLink", "onResponse: "+ the_infoLink);
+                                // todo try and cahte
+                                String the_infoLink = "";
+                                try {
+                                    the_infoLink = thevolumeInfo.getString("infoLink");
+                                    Log.d("1infoLink", "onResponse: " + the_infoLink);
+                                } catch (Exception e) {
+                                    the_infoLink = "none";
+                                    e.printStackTrace();
+                                }
 
-                                JSONArray industryIdentifiers = thevolumeInfo.getJSONArray("industryIdentifiers");
 
-                                String the_get_ISBN_13 = industryIdentifiers.getJSONObject(0).getString("identifier");
 
-                                Log.d("1industryIdentifiers", "onResponse: "+the_get_ISBN_13);
+                                JSONArray industryIdentifiers = new JSONArray();
 
+                                String the_get_ISBN_13 = "";
+                                try {
+                                    industryIdentifiers = thevolumeInfo.getJSONArray("industryIdentifiers");
+                                    the_get_ISBN_13 = industryIdentifiers.getJSONObject(0).getString("identifier");
+                                    Log.d("1industryIdentifiers", "onResponse: " + the_get_ISBN_13);
+                                }catch (Exception e){
+                                    the_get_ISBN_13 = "9780465094639";
+                                    e.printStackTrace();
+                                }
 
 
 
@@ -342,6 +365,7 @@ public class HomeFragment extends Fragment {
                                     the_book.setAverageRating(the_AVG_now);
                                 }
 
+                                is_call = true;
 
                                 // set to the book Class (setAverageRating is set above in volley )
                                 the_book.setTitle(the_title);
@@ -356,12 +380,17 @@ public class HomeFragment extends Fragment {
                                 the_book.setInfoLink(the_infoLink);
                                 the_book.setAuthors(the_authors);
 
+                                COMPUTERS_array.add(the_book);
+
 
                             }
+                            // call the recycler view and the adapter
+                            call_rec();
                         } catch (JSONException e) {
                             // If an error occurs, this prints the error to the log
                             e.printStackTrace();
                         }
+
                     }
                 },
                 // The final parameter overrides the method onErrorResponse() and passes VolleyError
@@ -376,7 +405,21 @@ public class HomeFragment extends Fragment {
         );
 
         requestQueue.add(obreq);
+
     }
+
+    private void call_rec(){
+        RecyclerView recyclerView1 = getView().findViewById(R.id.recycler_view_1);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(
+                getActivity(),LinearLayoutManager.HORIZONTAL
+                ,false);
+        recyclerView1.setLayoutManager(layoutManager);
+        recyclerView1.setItemAnimator(new DefaultItemAnimator());
+
+        recycler_Adpter_HORIZONTAL adpterHORIZONTAL = new recycler_Adpter_HORIZONTAL(COMPUTERS_array,getContext());
+        recyclerView1.setAdapter(adpterHORIZONTAL);
+    }
+
 
 
 
@@ -384,5 +427,10 @@ public class HomeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private void msg(String text){
+        Toast.makeText(getActivity(),text,Toast.LENGTH_SHORT)
+                .show();
     }
 }
