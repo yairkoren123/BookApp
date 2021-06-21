@@ -88,7 +88,7 @@ public class recycler_Adpter_HORIZONTAL extends RecyclerView.Adapter<recycler_Ad
             Log.d("555pos", "onBindViewHolder: " + position + " title " + arrayList.get(position).getTitle());
 
             holder.imageView.setVisibility(View.GONE);
-            holder.textView.setWidth(0);
+            holder.textView.setWidth(130);
             holder.textView.setBackgroundResource(R.drawable.background_home_1);
 
 

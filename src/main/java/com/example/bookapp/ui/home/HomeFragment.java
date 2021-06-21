@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +25,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.bookapp.MainActivity;
 import com.example.bookapp.R;
 import com.example.bookapp.books_class.The_Book;
 import com.example.bookapp.databinding.FragmentHomeBinding;
@@ -87,11 +90,11 @@ public class HomeFragment extends Fragment {
     binding = FragmentHomeBinding.inflate(inflater, container, false);
     View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
+
+
         homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                textView.setText(s);
             }
         });
         return root;
@@ -110,12 +113,16 @@ public class HomeFragment extends Fragment {
 //        String the_random = Subject_Headings[randomNumber];
 
 
-        Subject_Headings.add("ART");
-        Subject_Headings.add("COMPUTERS");
-        Subject_Headings.add("HISTORY");
-        Subject_Headings.add("HUMOR");
+        Subject_Headings.add("ART");       // art
+        Subject_Headings.add("RECREATION");
+
+        Subject_Headings.add("COMPUTERS"); // tec
+        Subject_Headings.add("HISTORY"); // history
+//        Subject_Headings.add("HUMOR");
         Subject_Headings.add("EDUCATION");
-        Subject_Headings.add("FICTION");
+
+
+        Subject_Headings.add("SCIENCE");
         Subject_Headings.add("DESIGN");
         Subject_Headings.add("HOBBIES");
 
@@ -141,6 +148,7 @@ public class HomeFragment extends Fragment {
 //        URL_JSON = "https://www.googleapis.com/books/v1/volumes?q=subject:"+the_random+"&maxResults=10";
 
         //https://www.googleapis.com/books/v1/volumes?q=subject:COMPUTERS&maxResults=10
+
 
 
         for (int i = 0; i < 5; i++) {
@@ -175,6 +183,8 @@ public class HomeFragment extends Fragment {
 
 
             the_book = new The_Book();
+
+
 
 
 
@@ -506,83 +516,280 @@ public class HomeFragment extends Fragment {
         Log.d("1switch", "call_rec: now in " + rec_now);
 
         LinearLayoutManager layoutManager;
-        recycler_Adpter_HORIZONTAL adpterHORIZONTAL;
 
 
         switch (rec_now){
             case 1:
                 recyclerView1 = getView().findViewById(R.id.recycler_view_1);
 
+
+                ArrayList<The_Book> try1 = COMPUTERS_array;
+
+
                 layoutManager = new LinearLayoutManager(
                         getActivity(),LinearLayoutManager.HORIZONTAL
                         ,false);
                 recyclerView1.setLayoutManager(layoutManager);
                 recyclerView1.setItemAnimator(new DefaultItemAnimator());
 
-                adpterHORIZONTAL = new recycler_Adpter_HORIZONTAL(COMPUTERS_array,getContext());
-                recyclerView1.setAdapter(adpterHORIZONTAL);
+                recycler_Adpter_HORIZONTAL adpterHORIZONTAL1 = new recycler_Adpter_HORIZONTAL(try1,getContext());
+                recyclerView1.setAdapter(adpterHORIZONTAL1);
 
 
                 Log.d("1switch", "call_rec: now in switch 1 ");
 
+                TextView textView1 = binding.textView1;
+                textView1.setText(the_remove_headline.get(0));
+
+                recyclerView1.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+                    @Override
+                    public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                        Log.d("4scrool", "onScrollChange:  " + scrollX + " old : " + oldScrollX);
+                        if (oldScrollX != 0) {
+                            The_Book book1 = new The_Book();
+                            book1 = try1.get(0);
+
+                            if (book1.getCategories().equals("")
+                                    && book1.getDescription().equals("")
+                                    && book1.getInfoLink().equals("")) {
+
+                                try1.remove(book1);
+                                recycler_Adpter_HORIZONTAL adpterHORIZONTAL4 = new recycler_Adpter_HORIZONTAL(try1, getContext());
+                                recyclerView1.setAdapter(adpterHORIZONTAL4);
+                                adpterHORIZONTAL4.notifyDataSetChanged();
+
+                                final TextView textView4 = binding.textView1;
+
+                                Animation animate = AnimationUtils.loadAnimation(getContext(),
+                                        R.anim.fade);
+                                textView4.setVisibility(View.VISIBLE);
+                                Log.d("animnow", "onClick: new");
+                                textView4.startAnimation(animate);
+
+                            }
+                        }
+                    }
+                });
+
+
+
+
                 break;
             case 2:
-                recyclerView1 = getView().findViewById(R.id.recycler_view_2);
 
+                RecyclerView recyclerView2 ;
+
+                recyclerView2 = getView().findViewById(R.id.recycler_view_2);
+
+                TextView textView2 = binding.textView2;
+                textView2.setText(the_remove_headline.get(1));
+
+
+                ArrayList<The_Book> try2 = COMPUTERS_array;
 
                 layoutManager = new LinearLayoutManager(
                         getActivity(),LinearLayoutManager.HORIZONTAL
                         ,false);
-                recyclerView1.setLayoutManager(layoutManager);
-                recyclerView1.setItemAnimator(new DefaultItemAnimator());
 
-                adpterHORIZONTAL = new recycler_Adpter_HORIZONTAL(COMPUTERS_array,getContext());
-                recyclerView1.setAdapter(adpterHORIZONTAL);
+                recyclerView2.setLayoutManager(layoutManager);
+                recyclerView2.setItemAnimator(new DefaultItemAnimator());
+
+                recycler_Adpter_HORIZONTAL adpterHORIZONTAL2 = new recycler_Adpter_HORIZONTAL(try2,getContext());
+                recyclerView2.setAdapter(adpterHORIZONTAL2);
 
 
                 Log.d("1switch", "call_rec: now in switch  2");
+
+
+                recyclerView2.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+                    @Override
+                    public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                        Log.d("2scrool", "onScrollChange:  " + scrollX + " old : " + oldScrollX);
+                        if (oldScrollX != 0) {
+                            The_Book book2 = new The_Book();
+                            book2 = try2.get(0);
+
+                            if (book2.getCategories().equals("")
+                                    && book2.getDescription().equals("")
+                                    && book2.getInfoLink().equals("")) {
+
+                                try2.remove(book2);
+                                recycler_Adpter_HORIZONTAL adpterHORIZONTAL4 = new recycler_Adpter_HORIZONTAL(try2, getContext());
+                                recyclerView2.setAdapter(adpterHORIZONTAL4);
+                                adpterHORIZONTAL4.notifyDataSetChanged();
+
+                                final TextView textView4 = binding.textView2;
+
+                                Animation animate = AnimationUtils.loadAnimation(getContext(),
+                                        R.anim.fade);
+                                textView4.setVisibility(View.VISIBLE);
+                                Log.d("animnow", "onClick: new");
+                                textView4.startAnimation(animate);
+
+                            }
+                        }
+                    }
+                });
+
+
 
                 break;
             case 3:
                 Log.d("1switch", "call_rec: now in switch  3");
 
-                recyclerView1 = getView().findViewById(R.id.recycler_view_3);
+                RecyclerView recyclerView3;
+
+
+                ArrayList<The_Book> try3 = COMPUTERS_array;
+
+                TextView textView3 = binding.textView3;
+                textView3.setText(the_remove_headline.get(2));
+
+
+                recyclerView3 = getView().findViewById(R.id.recycler_view_3);
                 layoutManager = new LinearLayoutManager(
                         getActivity(),LinearLayoutManager.HORIZONTAL
                         ,false);
-                recyclerView1.setLayoutManager(layoutManager);
-                recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                recyclerView3.setLayoutManager(layoutManager);
+                recyclerView3.setItemAnimator(new DefaultItemAnimator());
 
-                adpterHORIZONTAL = new recycler_Adpter_HORIZONTAL(COMPUTERS_array,getContext());
-                recyclerView1.setAdapter(adpterHORIZONTAL);
+                recycler_Adpter_HORIZONTAL adpterHORIZONTAL3 = new recycler_Adpter_HORIZONTAL(try3,getContext());
+                recyclerView3.setAdapter(adpterHORIZONTAL3);
+
+                recyclerView3.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+                    @Override
+                    public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                        Log.d("3scrool", "onScrollChange:  " + scrollX + " old : " + oldScrollX);
+                        if (oldScrollX != 0) {
+                            The_Book book3 = new The_Book();
+                            book3 = try3.get(0);
+
+                            if (book3.getCategories().equals("")
+                                    && book3.getDescription().equals("")
+                                    && book3.getInfoLink().equals("")) {
+
+                                try3.remove(book3);
+                                recycler_Adpter_HORIZONTAL adpterHORIZONTAL4 = new recycler_Adpter_HORIZONTAL(try3, getContext());
+                                recyclerView3.setAdapter(adpterHORIZONTAL4);
+                                adpterHORIZONTAL4.notifyDataSetChanged();
+
+                                final TextView textView3 = binding.textView3;
+
+                                Animation animate = AnimationUtils.loadAnimation(getContext(),
+                                        R.anim.fade);
+                                textView3.setVisibility(View.VISIBLE);
+                                Log.d("animnow", "onClick: new");
+                                textView3.startAnimation(animate);
+
+                            }
+                        }
+                    }
+                });
+
                 break;
 
             case 4:
                 Log.d("1switch", "call_rec: now in switch  4");
 
-                recyclerView1 = getView().findViewById(R.id.recycler_view_4);
+                ArrayList<The_Book> try4 = COMPUTERS_array;
+                RecyclerView recyclerView4;
+
+                TextView textView4 = binding.textView4;
+                textView4.setText(the_remove_headline.get(3));
+
+                recyclerView4 = getView().findViewById(R.id.recycler_view_4);
                 layoutManager = new LinearLayoutManager(
                         getActivity(),LinearLayoutManager.HORIZONTAL
                         ,false);
-                recyclerView1.setLayoutManager(layoutManager);
-                recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                recyclerView4.setLayoutManager(layoutManager);
+                recyclerView4.setItemAnimator(new DefaultItemAnimator());
 
-                adpterHORIZONTAL = new recycler_Adpter_HORIZONTAL(COMPUTERS_array,getContext());
-                recyclerView1.setAdapter(adpterHORIZONTAL);
+                recycler_Adpter_HORIZONTAL adpterHORIZONTAL4 = new recycler_Adpter_HORIZONTAL(try4,getContext());
+                recyclerView4.setAdapter(adpterHORIZONTAL4);
+
+                recyclerView4.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+                    @Override
+                    public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                        Log.d("4scrool", "onScrollChange:  " + scrollX + " old : " + oldScrollX);
+                        if (oldScrollX != 0) {
+                            The_Book book4 = new The_Book();
+                            book4 = try4.get(0);
+
+                            if (book4.getCategories().equals("")
+                                    && book4.getDescription().equals("")
+                                    && book4.getInfoLink().equals("")) {
+
+                                try4.remove(book4);
+                                recycler_Adpter_HORIZONTAL adpterHORIZONTAL4 = new recycler_Adpter_HORIZONTAL(try4, getContext());
+                                recyclerView4.setAdapter(adpterHORIZONTAL4);
+                                adpterHORIZONTAL4.notifyDataSetChanged();
+
+                                final TextView textView4 = binding.textView4;
+
+                                Animation animate = AnimationUtils.loadAnimation(getContext(),
+                                        R.anim.fade);
+                                textView4.setVisibility(View.VISIBLE);
+                                Log.d("animnow", "onClick: new");
+                                textView4.startAnimation(animate);
+
+                            }
+                        }
+                    }
+                });
+
                 break;
 
             case 5:
                 Log.d("1switch", "call_rec: now in switch  5");
 
-                recyclerView1 = getView().findViewById(R.id.recycler_view_5);
+                ArrayList<The_Book> try5 = COMPUTERS_array;
+
+                RecyclerView recyclerView5;
+
+                TextView textView5 = binding.textView5;
+                textView5.setText(the_remove_headline.get(4));
+
+
+
+                recyclerView5 = getView().findViewById(R.id.recycler_view_5);
                 layoutManager = new LinearLayoutManager(
                         getActivity(),LinearLayoutManager.HORIZONTAL
                         ,false);
-                recyclerView1.setLayoutManager(layoutManager);
-                recyclerView1.setItemAnimator(new DefaultItemAnimator());
+                recyclerView5.setLayoutManager(layoutManager);
+                recyclerView5.setItemAnimator(new DefaultItemAnimator());
 
-                adpterHORIZONTAL = new recycler_Adpter_HORIZONTAL(COMPUTERS_array,getContext());
-                recyclerView1.setAdapter(adpterHORIZONTAL);
+                recycler_Adpter_HORIZONTAL adpterHORIZONTAL5 = new recycler_Adpter_HORIZONTAL(try5,getContext());
+                recyclerView5.setAdapter(adpterHORIZONTAL5);
+
+
+                recyclerView5.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+                    @Override
+                    public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                        Log.d("5scrool", "onScrollChange:  " + scrollX + " old : " + oldScrollX);
+                        if (oldScrollX != 0) {
+                            The_Book book5 = new The_Book();
+                            book5 = try5.get(0);
+
+                            if (book5.getCategories().equals("")
+                                    && book5.getDescription().equals("")
+                                    && book5.getInfoLink().equals("")) {
+                                try5.remove(book5);
+                                recycler_Adpter_HORIZONTAL adpterHORIZONTAL5 = new recycler_Adpter_HORIZONTAL(try5, getContext());
+                                recyclerView5.setAdapter(adpterHORIZONTAL5);
+                                adpterHORIZONTAL5.notifyDataSetChanged();
+
+                                final TextView textView5 = binding.textView5;
+
+                                Animation animate = AnimationUtils.loadAnimation(getContext(),
+                                        R.anim.fade);
+                                textView5.setVisibility(View.VISIBLE);
+                                Log.d("animnow", "onClick: new");
+                                textView5.startAnimation(animate);
+                            }
+                        }
+                    }
+                });
+
                 break;
 
         }
@@ -607,4 +814,5 @@ public class HomeFragment extends Fragment {
         Toast.makeText(getActivity(),text,Toast.LENGTH_SHORT)
                 .show();
     }
+
 }
