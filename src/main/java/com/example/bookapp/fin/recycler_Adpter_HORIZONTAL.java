@@ -12,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -78,22 +80,43 @@ public class recycler_Adpter_HORIZONTAL extends RecyclerView.Adapter<recycler_Ad
 
         // todo make the image work !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-        Glide.with(context).load(image).placeholder(R.drawable.ic_baseline_book_24).dontAnimate().into(holder.imageView);
+
+        if (arrayList.get(position).getCategories().equals("")
+                && arrayList.get(position).getDescription().equals("")
+        && arrayList.get(position).getInfoLink().equals("")) {
+
+            Log.d("555pos", "onBindViewHolder: " + position + " title " + arrayList.get(position).getTitle());
+
+            holder.imageView.setVisibility(View.GONE);
+            holder.textView.setWidth(0);
+            holder.textView.setBackgroundResource(R.drawable.background_home_1);
 
 
-//        https://www.eduprizeschools.net/wp-content/uploads/2016/06/No_Image_Available.jpg
-//        Glide.with(context)
-//                .load(image)
-//                .centerCrop()
-//                .into(holder.imageView);
+            // is the no image
+
+//            image = "https:www.eduprizeschools.net/wp-content/uploads/2016/06/No_Image_Available.jpg";
+//            Glide.with(context)
+//                    .load(image)
+//                    .centerCrop()
+//                    .into(holder.imageView);
+        }else {
+            holder.imageView.setVisibility(View.VISIBLE);
+            holder.textView.setBackgroundResource(R.drawable.background_def);
+
+            Glide.with(context).load(image).placeholder(R.drawable.ic_baseline_book_24).dontAnimate().into(holder.imageView);
+        }
+
         //holder.imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
 
-                    Log.d("opop", "onBindViewHolder: " + image);
+        Log.d("opop", "onBindViewHolder: " + image);
 
         // set text
 
         holder.textView.setText(arrayList.get(position).getTitle());
+        if (arrayList.get(position).getTitle().length() > 50){
+            holder.textView.setTextSize(12);
+        }
 
 
     }
@@ -107,12 +130,15 @@ public class recycler_Adpter_HORIZONTAL extends RecyclerView.Adapter<recycler_Ad
         // here values
         ImageView imageView;
         TextView textView, stars_avg;
+        CardView cardView ;
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             // find by id ; here
             imageView = itemView.findViewById(R.id.image_rec);
             textView = itemView.findViewById(R.id.text_rec);
+            cardView = itemView.findViewById(R.id.card_row);
+
 
         }
     }
