@@ -14,6 +14,8 @@ public class The_Book {
     String imageback = "";
     String infoLink = "";
     String authors = "";
+    String people_ratting = "";
+    String click_URL = "";
 
     public The_Book() {
     }
@@ -150,5 +152,21 @@ public class The_Book {
 
     public void setAuthors(String authors) {
         this.authors = authors;
+    }
+
+    public String getClick_URL() {
+        return click_URL;
+    }
+
+    public void setClick_URL(String click_URL) {
+        this.click_URL = click_URL;
+    }
+
+    public String getPeople_ratting() {
+        return people_ratting;
+    }
+
+    public void setPeople_ratting(String people_ratting) {
+        this.people_ratting = people_ratting;
     }
 }

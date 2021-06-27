@@ -1,6 +1,9 @@
 package com.example.bookapp.ui.home;
 
+import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,8 +38,12 @@ import com.example.bookapp.fin.recycler_Adpter_HORIZONTAL;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Element;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class HomeFragment extends Fragment {
@@ -46,6 +53,12 @@ public class HomeFragment extends Fragment {
     int rec_now = 1;
 
     RecyclerView recyclerView1;
+    RecyclerView recyclerView2;
+    RecyclerView recyclerView3;
+    RecyclerView recyclerView4;
+    RecyclerView recyclerView5;
+
+    LinearLayoutManager layoutManager;
 
 
 
@@ -72,9 +85,13 @@ public class HomeFragment extends Fragment {
 
     ArrayList<String> the_remove_headline = new ArrayList<>();
 
+    String last_value = "";
+
 
 
     ArrayList<String> Subject_Headings = new ArrayList();
+
+
 
 
     private FragmentHomeBinding binding;
@@ -89,6 +106,20 @@ public class HomeFragment extends Fragment {
 
     binding = FragmentHomeBinding.inflate(inflater, container, false);
     View root = binding.getRoot();
+
+
+        recyclerView1 = binding.recyclerView1;
+        recyclerView2 = binding.recyclerView2;
+        recyclerView3 = binding.recyclerView3;
+        recyclerView4 = binding.recyclerView4;
+        recyclerView5 = binding.recyclerView5;
+
+
+        layoutManager = new LinearLayoutManager(
+                getActivity(),LinearLayoutManager.HORIZONTAL
+                ,false);
+
+
 
 
 
@@ -108,28 +139,362 @@ public class HomeFragment extends Fragment {
 
 
 
-
 //        int randomNumber=r.nextInt(Subject_Headings.length);
 //        String the_random = Subject_Headings[randomNumber];
 
 
-        Subject_Headings.add("ART");       // art
-        Subject_Headings.add("RECREATION");
-
-        Subject_Headings.add("COMPUTERS"); // tec
-        Subject_Headings.add("HISTORY"); // history
-//        Subject_Headings.add("HUMOR");
-        Subject_Headings.add("EDUCATION");
+        String[] cat = new String[]
+                {"Fantasy","History","Horror","Music","Mystery","Sports","Travel"};
 
 
-        Subject_Headings.add("SCIENCE");
-        Subject_Headings.add("DESIGN");
-        Subject_Headings.add("HOBBIES");
 
-        getBooks();
+        for (String head : cat){
+            Subject_Headings.add(head);
+        }
 
+        //getBooks();
+
+
+
+        des_back des_back = new des_back();
+        des_back.execute();
 
     }
+
+
+
+    private class des_back extends AsyncTask<Void,Void,Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+//            //org.jsoup.nodes.Document doc = null;
+//            try {
+//                org.jsoup.nodes.Document doc = Jsoup.connect("https://www.imdb.com/chart/top")
+//                        .get();
+//                org.jsoup.select.Elements body = doc.select("tbody.lister-list");
+//
+//                // the size
+//                //Log.d("ppp", "onCreate: " + body.select("tr").size());
+//
+//                for (Element e : body.select("tr") ){
+//
+//                    String img = e.select("td.posterColumn img").attr("src");
+//                    String title = e.select("td.posterColumn img").attr("alt");
+//
+//
+//                    Log.d("ppp", "onCreate: " + title);
+//
+//
+//                }
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+
+            // getting from search text and click
+//            try {
+//                org.jsoup.nodes.Document doc = Jsoup.connect("https://www.goodreads.com/search?utf8=%E2%9C%93&q=java&search_type=books&search%5Bfield%5D=on")
+//                        .get();
+//                org.jsoup.select.Elements body = doc.select("table.tableList");
+//
+//
+//                // the size
+//                Log.d("ppp", "onCreate: " + body.select("tr").size());
+//
+//                for (Element e : body.select("tr") ){
+//
+//                    String img = e.select("td a").attr("title");
+//                    //String title = e.select("td.posterColumn img").attr("alt");
+//
+//
+//
+//                    String url_click = e.select("td a").attr("href");
+//                    get_by_click(url_click);
+//
+//                    Log.d("ppp", "onCreate: " + img);
+//
+//                    Log.d("ppp", "onCreate123: https://www.goodreads.com/" + url_click);
+//
+//
+//
+//                }
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+
+            getActivity().runOnUiThread(new Runnable() {
+
+                @Override
+                public void run() {
+
+                    for (int i = 0; i < 2; i++) {
+
+
+                        Random r = new Random();
+
+
+                        int index = new Random().nextInt(Subject_Headings.size());
+
+                        the_random = Subject_Headings.get(index);
+
+                        Log.d("1random", "getBooks: " + the_random);
+
+                        get_by_cat(the_random);
+
+                        Subject_Headings.remove(index);
+                    }
+
+
+                }
+            });
+
+
+
+
+            return null;
+        }
+
+        private void get_by_click(String url){
+
+            Log.d("click1", "get_by_click: " + url);
+
+        }
+
+        private void get_by_cat(String text){
+
+            try {
+
+                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+
+                StrictMode.setThreadPolicy(policy);
+
+
+                org.jsoup.nodes.Document doc = Jsoup.connect("https://www.goodreads.com/genres/most_read/"+text)
+                        .timeout(6000).get();
+
+
+                org.jsoup.select.Elements body = doc.select("div.bigBoxBody");
+
+
+                // the size
+                Log.d("qqq", "onCreate: " + body.size());
+                //Log.d("qqq", "onCreate: " + body.select("div.coverWrapper img")
+                //.attr("alt"));
+
+//                for (Element e : body.select("div") ) {
+//                for (int i = 0; i < body.select("div").size(); i++) {
+
+                for (int i = 0; i < 15; i++) {
+
+                    Element e = body.select("div").get(i);
+
+                    recyclerView1 = binding.recyclerView1;
+
+                    The_Book the_book = new The_Book();
+
+                    String title = e.select("div.coverWrapper img").attr("alt");
+                    boolean is_there = false;
+                    Log.d("eee", "onCreate: " + title);
+
+
+                    for (The_Book s : COMPUTERS_array){
+                        if (s.getTitle().equals(the_book.getTitle())){
+                            is_there = true;
+                        }else if (last_value.equals(title)){
+                            is_there = true;
+                        }else if (title.equals("")){
+                            is_there = true;
+                        }
+                    }
+                    if (is_there != true){
+
+                        //String title = e.select("td.posterColumn img").attr("alt");
+
+                        String img = e.select("div.coverWrapper img").attr("src");
+                        String g_click_url_item = e.select("div.coverWrapper a").attr("href");
+                        String click_url_item = "https://www.goodreads.com/" + g_click_url_item;
+                        Log.d("ddd", "onCreate: " + click_url_item);
+
+                        the_book.setClick_URL(click_url_item);
+                        the_book.setTitle(title);
+                        the_book.setImagesfront(img);
+
+
+                        Log.d("ppp", "onCreate: " + img);
+
+                        last_value = title;
+
+
+                        COMPUTERS_array.add(the_book);
+
+
+                    }
+                }
+
+
+
+
+
+
+
+                layoutManager = new LinearLayoutManager(
+                        getActivity(),LinearLayoutManager.HORIZONTAL
+                        ,false);
+                    switch (rec_now){
+                        case 1:
+
+                            ArrayList<The_Book> try1 = COMPUTERS_array;
+
+                            recyclerView1.setLayoutManager(layoutManager);
+                            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+
+                            recycler_Adpter_HORIZONTAL adpterHORIZONTAL1 = new recycler_Adpter_HORIZONTAL(try1,getContext(),getActivity());
+                            recyclerView1.setAdapter(adpterHORIZONTAL1);
+
+
+                            Log.d("1switch", "call_rec: now in switch 1 ");
+
+                            TextView textView1 = binding.textView1;
+
+
+                            textView1.setText(text);
+                            break;
+                        case 2:
+
+                            ArrayList<The_Book> try2 = COMPUTERS_array;
+
+                            recyclerView2.setLayoutManager(layoutManager);
+                            recyclerView2.setItemAnimator(new DefaultItemAnimator());
+
+                            recycler_Adpter_HORIZONTAL adpterHORIZONTAL2 = new recycler_Adpter_HORIZONTAL(try2,getContext(),getActivity());
+                            recyclerView2.setAdapter(adpterHORIZONTAL2);
+
+
+                            Log.d("1switch", "call_rec: now in switch 2 ");
+
+                            TextView textView2 = binding.textView2;
+
+
+                            textView2.setText(text);
+                            break;
+
+                        case 3:
+
+                            ArrayList<The_Book> try3 = COMPUTERS_array;
+
+                            recyclerView3.setLayoutManager(layoutManager);
+                            recyclerView3.setItemAnimator(new DefaultItemAnimator());
+
+                            recycler_Adpter_HORIZONTAL adpterHORIZONTAL3 = new recycler_Adpter_HORIZONTAL(try3,getContext(),getActivity());
+                            recyclerView3.setAdapter(adpterHORIZONTAL3);
+
+
+                            Log.d("1switch", "call_rec: now in switch 3 ");
+
+                            TextView textView3 = binding.textView3;
+
+
+                            textView3.setText(text);
+                            break;
+
+                        case 4:
+
+                            ArrayList<The_Book> try4 = COMPUTERS_array;
+
+                            recyclerView4.setLayoutManager(layoutManager);
+                            recyclerView4.setItemAnimator(new DefaultItemAnimator());
+
+                            recycler_Adpter_HORIZONTAL adpterHORIZONTAL4 = new recycler_Adpter_HORIZONTAL(try4,getContext(),getActivity());
+                            recyclerView4.setAdapter(adpterHORIZONTAL4);
+
+
+                            Log.d("1switch", "call_rec: now in switch 4 ");
+
+                            TextView textView4 = binding.textView4;
+
+
+                            textView4.setText(text);
+                            break;
+
+                        case 5:
+
+                            ArrayList<The_Book> try5 = COMPUTERS_array;
+
+                            recyclerView5.setLayoutManager(layoutManager);
+                            recyclerView5.setItemAnimator(new DefaultItemAnimator());
+
+                            recycler_Adpter_HORIZONTAL adpterHORIZONTAL5 = new recycler_Adpter_HORIZONTAL(try5,getContext(),getActivity());
+                            recyclerView5.setAdapter(adpterHORIZONTAL5);
+
+
+                            Log.d("1switch", "call_rec: now in switch 5 ");
+
+                            TextView textView5 = binding.textView5;
+
+
+                            textView5.setText(text);
+                            break;
+
+
+
+                    }
+                // after switch
+                    rec_now++;
+                    COMPUTERS_array = new ArrayList<>();
+
+
+//                    recyclerView1.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+//                        @Override
+//                        public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+//                            Log.d("4scrool", "onScrollChange:  " + scrollX + " old : " + oldScrollX);
+//                            if (oldScrollX != 0) {
+//                                The_Book book1 = new The_Book();
+//                                book1 = try1.get(0);
+//
+//                                if (book1.getCategories().equals("")
+//                                        && book1.getDescription().equals("")
+//                                        && book1.getInfoLink().equals("")) {
+//
+//                                    try1.remove(book1);
+//                                    recycler_Adpter_HORIZONTAL adpterHORIZONTAL4 = new recycler_Adpter_HORIZONTAL(try1, getContext(), getActivity());
+//                                    recyclerView1.setAdapter(adpterHORIZONTAL4);
+//                                    adpterHORIZONTAL4.notifyDataSetChanged();
+//
+//                                    final TextView textView4 = binding.textView1;
+//
+//                                    Animation animate = AnimationUtils.loadAnimation(getContext(),
+//                                            R.anim.fade);
+//                                    textView4.setVisibility(View.VISIBLE);
+//                                    Log.d("animnow", "onClick: new");
+//                                    textView4.startAnimation(animate);
+//
+////                                }
+//                            }
+//                        }
+//                    });
+
+
+                    //call_rec();
+
+                    //Log.d("ppp", "onCreate123: https://www.goodreads.com/" + url_click);
+
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+
+
+
+
+
+
 
     private void getBooks() {
 
@@ -174,7 +539,7 @@ public class HomeFragment extends Fragment {
             Log.d("1random", "getBooks: " + the_random);
 
 
-            URL_JSON = "https://www.googleapis.com/books/v1/volumes?q=subject:" + the_random + "&maxResults=10";
+            URL_JSON = "https://www.googleapis.com/books/v1/volumes?q=subject:" + the_random + "&maxResults=1";
 
             Subject_Headings.remove(index);
             the_remove_headline.add(the_random);
@@ -253,6 +618,7 @@ public class HomeFragment extends Fragment {
                                         String the_count_authors = thevolumeInfo.getString("authors");
                                         // todo you know what ... ["Harvey M. Deitel","Paul J. Deitel"] ... split the names . with for loop??
                                         Log.d("1countaut", "onResponse: " + the_count_authors);
+                                        the_authors = the_count_authors;
 
                                     } catch (Exception e) {
                                         the_authors = "none";
@@ -321,6 +687,7 @@ public class HomeFragment extends Fragment {
                                         the_country = jsonObject1.getString("country");
                                         Log.d("1country", "onResponse: " + the_country);
                                     } catch (Exception e) {
+                                        the_country = "";
                                         e.printStackTrace();
                                     }
                                     // get categories
@@ -471,6 +838,7 @@ public class HomeFragment extends Fragment {
                                     the_book.setPublishedDate(the_publishedDate);
                                     the_book.setLanguage(the_len);
                                     the_book.setCategories(the_categories);
+                                    the_book.setAuthors(the_authors);
                                     the_book.setCountry(the_country);
                                     the_book.setDescription(the_description);
                                     the_book.setPageCount(the_pageCount);
@@ -515,24 +883,23 @@ public class HomeFragment extends Fragment {
     private void call_rec(){
         Log.d("1switch", "call_rec: now in " + rec_now);
 
-        LinearLayoutManager layoutManager;
-
-
         switch (rec_now){
             case 1:
-                recyclerView1 = getView().findViewById(R.id.recycler_view_1);
+                //recyclerView1 = getView().findViewById(R.id.recycler_view_1);
 
 
                 ArrayList<The_Book> try1 = COMPUTERS_array;
 
 
-                layoutManager = new LinearLayoutManager(
+                LinearLayoutManager layoutManager = new LinearLayoutManager(
                         getActivity(),LinearLayoutManager.HORIZONTAL
                         ,false);
+
+
                 recyclerView1.setLayoutManager(layoutManager);
                 recyclerView1.setItemAnimator(new DefaultItemAnimator());
 
-                recycler_Adpter_HORIZONTAL adpterHORIZONTAL1 = new recycler_Adpter_HORIZONTAL(try1,getContext());
+                recycler_Adpter_HORIZONTAL adpterHORIZONTAL1 = new recycler_Adpter_HORIZONTAL(try1,getContext(),getActivity());
                 recyclerView1.setAdapter(adpterHORIZONTAL1);
 
 
@@ -554,7 +921,7 @@ public class HomeFragment extends Fragment {
                                     && book1.getInfoLink().equals("")) {
 
                                 try1.remove(book1);
-                                recycler_Adpter_HORIZONTAL adpterHORIZONTAL4 = new recycler_Adpter_HORIZONTAL(try1, getContext());
+                                recycler_Adpter_HORIZONTAL adpterHORIZONTAL4 = new recycler_Adpter_HORIZONTAL(try1, getContext(),getActivity());
                                 recyclerView1.setAdapter(adpterHORIZONTAL4);
                                 adpterHORIZONTAL4.notifyDataSetChanged();
 
@@ -594,7 +961,7 @@ public class HomeFragment extends Fragment {
                 recyclerView2.setLayoutManager(layoutManager);
                 recyclerView2.setItemAnimator(new DefaultItemAnimator());
 
-                recycler_Adpter_HORIZONTAL adpterHORIZONTAL2 = new recycler_Adpter_HORIZONTAL(try2,getContext());
+                recycler_Adpter_HORIZONTAL adpterHORIZONTAL2 = new recycler_Adpter_HORIZONTAL(try2,getContext(),getActivity());
                 recyclerView2.setAdapter(adpterHORIZONTAL2);
 
 
@@ -614,7 +981,7 @@ public class HomeFragment extends Fragment {
                                     && book2.getInfoLink().equals("")) {
 
                                 try2.remove(book2);
-                                recycler_Adpter_HORIZONTAL adpterHORIZONTAL4 = new recycler_Adpter_HORIZONTAL(try2, getContext());
+                                recycler_Adpter_HORIZONTAL adpterHORIZONTAL4 = new recycler_Adpter_HORIZONTAL(try2, getContext(),getActivity());
                                 recyclerView2.setAdapter(adpterHORIZONTAL4);
                                 adpterHORIZONTAL4.notifyDataSetChanged();
 
@@ -653,7 +1020,7 @@ public class HomeFragment extends Fragment {
                 recyclerView3.setLayoutManager(layoutManager);
                 recyclerView3.setItemAnimator(new DefaultItemAnimator());
 
-                recycler_Adpter_HORIZONTAL adpterHORIZONTAL3 = new recycler_Adpter_HORIZONTAL(try3,getContext());
+                recycler_Adpter_HORIZONTAL adpterHORIZONTAL3 = new recycler_Adpter_HORIZONTAL(try3,getContext(),getActivity());
                 recyclerView3.setAdapter(adpterHORIZONTAL3);
 
                 recyclerView3.setOnScrollChangeListener(new View.OnScrollChangeListener() {
@@ -669,7 +1036,7 @@ public class HomeFragment extends Fragment {
                                     && book3.getInfoLink().equals("")) {
 
                                 try3.remove(book3);
-                                recycler_Adpter_HORIZONTAL adpterHORIZONTAL4 = new recycler_Adpter_HORIZONTAL(try3, getContext());
+                                recycler_Adpter_HORIZONTAL adpterHORIZONTAL4 = new recycler_Adpter_HORIZONTAL(try3, getContext(),getActivity());
                                 recyclerView3.setAdapter(adpterHORIZONTAL4);
                                 adpterHORIZONTAL4.notifyDataSetChanged();
 
@@ -704,7 +1071,7 @@ public class HomeFragment extends Fragment {
                 recyclerView4.setLayoutManager(layoutManager);
                 recyclerView4.setItemAnimator(new DefaultItemAnimator());
 
-                recycler_Adpter_HORIZONTAL adpterHORIZONTAL4 = new recycler_Adpter_HORIZONTAL(try4,getContext());
+                recycler_Adpter_HORIZONTAL adpterHORIZONTAL4 = new recycler_Adpter_HORIZONTAL(try4,getContext(),getActivity());
                 recyclerView4.setAdapter(adpterHORIZONTAL4);
 
                 recyclerView4.setOnScrollChangeListener(new View.OnScrollChangeListener() {
@@ -720,7 +1087,7 @@ public class HomeFragment extends Fragment {
                                     && book4.getInfoLink().equals("")) {
 
                                 try4.remove(book4);
-                                recycler_Adpter_HORIZONTAL adpterHORIZONTAL4 = new recycler_Adpter_HORIZONTAL(try4, getContext());
+                                recycler_Adpter_HORIZONTAL adpterHORIZONTAL4 = new recycler_Adpter_HORIZONTAL(try4, getContext(),getActivity());
                                 recyclerView4.setAdapter(adpterHORIZONTAL4);
                                 adpterHORIZONTAL4.notifyDataSetChanged();
 
@@ -758,7 +1125,7 @@ public class HomeFragment extends Fragment {
                 recyclerView5.setLayoutManager(layoutManager);
                 recyclerView5.setItemAnimator(new DefaultItemAnimator());
 
-                recycler_Adpter_HORIZONTAL adpterHORIZONTAL5 = new recycler_Adpter_HORIZONTAL(try5,getContext());
+                recycler_Adpter_HORIZONTAL adpterHORIZONTAL5 = new recycler_Adpter_HORIZONTAL(try5,getContext(),getActivity());
                 recyclerView5.setAdapter(adpterHORIZONTAL5);
 
 
@@ -774,7 +1141,7 @@ public class HomeFragment extends Fragment {
                                     && book5.getDescription().equals("")
                                     && book5.getInfoLink().equals("")) {
                                 try5.remove(book5);
-                                recycler_Adpter_HORIZONTAL adpterHORIZONTAL5 = new recycler_Adpter_HORIZONTAL(try5, getContext());
+                                recycler_Adpter_HORIZONTAL adpterHORIZONTAL5 = new recycler_Adpter_HORIZONTAL(try5, getContext(),getActivity());
                                 recyclerView5.setAdapter(adpterHORIZONTAL5);
                                 adpterHORIZONTAL5.notifyDataSetChanged();
 
