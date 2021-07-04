@@ -7,7 +7,7 @@ public class The_Book {
     String language = "";
     String country = "";
     String description = "";
-    int pageCount = 0;
+    String pageCount = "";
     String categories = "";
     String averageRating = "";
     String imagesfront = "";
@@ -28,18 +28,20 @@ public class The_Book {
                 ", language='" + language + '\'' +
                 ", country='" + country + '\'' +
                 ", description='" + description + '\'' +
-                ", pageCount=" + pageCount +
+                ", pageCount='" + pageCount + '\'' +
                 ", categories='" + categories + '\'' +
                 ", averageRating='" + averageRating + '\'' +
                 ", imagesfront='" + imagesfront + '\'' +
                 ", imageback='" + imageback + '\'' +
                 ", infoLink='" + infoLink + '\'' +
                 ", authors='" + authors + '\'' +
+                ", people_ratting='" + people_ratting + '\'' +
+                ", click_URL='" + click_URL + '\'' +
                 '}';
     }
 
     public The_Book(String title, String publishedDate, String language, String country,
-                    String description, int pageCount, String categories, String averageRating,
+                    String description, String pageCount, String categories, String averageRating,
                     String imagesfront, String imageback, String infoLink, String authors) {
         this.title = title;
         this.publishedDate = publishedDate;
@@ -98,11 +100,11 @@ public class The_Book {
         this.description = description;
     }
 
-    public int getPageCount() {
+    public String getPageCount() {
         return pageCount;
     }
 
-    public void setPageCount(int pageCount) {
+    public void setPageCount(String pageCount) {
         this.pageCount = pageCount;
     }
 

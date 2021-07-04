@@ -26,43 +26,48 @@
             android:id="@+id/title_overview"
             android:layout_width="140dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="84dp"
+            android:layout_marginTop="52dp"
             android:layout_marginEnd="36dp"
             android:text="name of the book"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/book_image_front_overview"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/ratting_overview_top"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="36dp"
             android:text="ratting"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/book_image_front_overview"
             app:layout_constraintTop_toBottomOf="@+id/title_overview" />
 
         <TextView
             android:id="@+id/year_overview"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="36dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="8dp"
             android:text="year"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/book_image_front_overview"
             app:layout_constraintTop_toBottomOf="@+id/ratting_overview_top" />
 
         <TextView
             android:id="@+id/len_overview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="23dp"
+            android:layout_marginEnd="8dp"
             android:text="len"
-            app:layout_constraintEnd_toStartOf="@+id/year_overview"
-            app:layout_constraintTop_toBottomOf="@+id/ratting_overview_top" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/book_image_front_overview"
+            app:layout_constraintTop_toBottomOf="@+id/year_overview" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -90,18 +95,22 @@
                         android:id="@+id/wirtes_overview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
                         android:text="wirtes" />
 
                     <TextView
                         android:id="@+id/des_overview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/open_sans_semibold"
                         android:text="des" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:padding="10dp">
 
                         <TextView
                             android:id="@+id/ratting_button_overview"
@@ -135,6 +144,23 @@
                         android:layout_weight="1"
                         android:autoLink="web"
                         android:text="more info" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="COMMUNITY REVIEWS "
+                        android:textStyle="bold" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerview_REVIEWS_overview"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp"
+                        android:background="@android:color/transparent"
+                        android:backgroundTint="@android:color/transparent" />
                 </LinearLayout>
             </ScrollView>
 

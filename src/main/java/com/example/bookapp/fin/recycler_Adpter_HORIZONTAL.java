@@ -102,7 +102,7 @@ public class recycler_Adpter_HORIZONTAL extends RecyclerView.Adapter<recycler_Ad
 
             image = selectedBook.getImagesfront();
             holder.imageView.setVisibility(View.VISIBLE);
-            holder.textView.setBackgroundResource(R.drawable.background_def);
+            //holder.textView.setBackgroundResource(R.drawable.background_def);
 
             Glide.with(context).load(image).placeholder(R.drawable.ic_baseline_book_24).dontAnimate().into(holder.imageView);
 
