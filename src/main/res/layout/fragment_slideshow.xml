@@ -15,19 +15,16 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/quotes_tab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Quotes" />
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/popular_tab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Popular" />
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/search_tab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Search" />

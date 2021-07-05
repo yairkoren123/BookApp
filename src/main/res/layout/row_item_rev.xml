@@ -6,12 +6,13 @@
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
     android:background="@android:color/transparent"
-    android:backgroundTint="@android:color/holo_green_light">
+    android:backgroundTint="@color/blue_700">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview_rev"
         android:layout_width="wrap_content"
         android:layout_height="300dp"
+        android:backgroundTint="@color/blue_700"
         android:elevation="12dp"
         android:padding="20dp"
         app:cardCornerRadius="12dp"
@@ -26,18 +27,21 @@
 
             <TextView
                 android:id="@+id/rev_name"
-                android:layout_width="210dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
                 android:gravity="center"
                 android:text="name"
+                android:textColor="#0FE49C"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
                 android:id="@+id/linearLayout4"
-                android:layout_width="wrap_content"
+                android:layout_width="230dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:orientation="horizontal"
@@ -49,9 +53,10 @@
 
                 <TextView
                     android:id="@+id/rev_de"
-                    android:layout_width="210dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="rev_descript" />
+                    android:text="rev_descript"
+                    android:textColor="@color/white" />
 
             </LinearLayout>
 
@@ -60,20 +65,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginEnd="16dp"
                 android:text="rec_stars"
+                android:textColor="#FF9800"
+                app:layout_constraintBottom_toTopOf="@+id/rev_likes"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+                app:layout_constraintVertical_bias="0.57" />
 
             <TextView
                 android:id="@+id/rev_likes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginBottom="16dp"
                 android:text="rev_likes"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rev_stars" />
+                android:textColor="#1599F3"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -75,7 +75,7 @@ public class recycler_Adpter_REVIEWS extends RecyclerView.Adapter<recycler_Adpte
 
 
 
-        holder.text_de.setText(Html.fromHtml(des+ " ..." + "<font color='red'> <u> (View More) </u></font>"));
+        holder.text_de.setText(Html.fromHtml(des+ "... " + "<font color='yellow'> <u>(View More)</u></font>"));
 
         holder.likes.setText(selected_rev.getLikes());
         holder.username.setText(selected_rev.getName());
@@ -121,9 +121,6 @@ public class recycler_Adpter_REVIEWS extends RecyclerView.Adapter<recycler_Adpte
             username = itemView.findViewById(R.id.rev_name);
             likes = itemView.findViewById(R.id.rev_likes);
             cardView = itemView.findViewById(R.id.cardview_rev);
-
-
-
 
         }
     }

@@ -20,6 +20,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.airbnb.lottie.LottieComposition;
+import com.airbnb.lottie.LottieOnCompositionLoadedListener;
 import com.example.bookapp.R;
 import com.example.bookapp.books_class.The_Book;
 import com.example.bookapp.fin.The_book_Fragment_overview;
@@ -322,6 +324,7 @@ public class Search_book_Fragment extends Fragment {
 
 
                 }
+                anim_stars.playAnimation();
 
                 for (boolean str : stars_there){
                     if (str == true){
@@ -329,6 +332,7 @@ public class Search_book_Fragment extends Fragment {
                     }else {
                         stars_there[position] = true;
                         anim_stars.playAnimation();
+
 
                     }
                 }

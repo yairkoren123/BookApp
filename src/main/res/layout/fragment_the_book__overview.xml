@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_green_dark"
+    android:background="#454545"
     tools:context=".fin.The_book_Fragment_overview">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,9 +26,11 @@
             android:id="@+id/title_overview"
             android:layout_width="140dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="52dp"
             android:layout_marginEnd="36dp"
             android:text="name of the book"
+            android:textColor="@color/teal_1000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/book_image_front_overview"
             app:layout_constraintTop_toTopOf="parent" />
@@ -53,6 +55,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="8dp"
             android:text="year"
+            android:textColor="@color/teal_700"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/book_image_front_overview"
             app:layout_constraintTop_toBottomOf="@+id/ratting_overview_top" />
@@ -62,10 +65,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="23dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_round"
+            android:padding="6dp"
             android:text="len"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.69"
             app:layout_constraintStart_toEndOf="@+id/book_image_front_overview"
             app:layout_constraintTop_toBottomOf="@+id/year_overview" />
 
@@ -73,14 +79,14 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="27dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="8dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.05"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/book_image_front_overview">
+            app:layout_constraintTop_toBottomOf="@+id/len_overview">
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -97,14 +103,16 @@
                         android:layout_height="wrap_content"
                         android:paddingTop="5dp"
                         android:paddingBottom="5dp"
-                        android:text="wirtes" />
+                        android:text="wirtes"
+                        android:textColor="@color/teal_700" />
 
                     <TextView
                         android:id="@+id/des_overview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/open_sans_semibold"
-                        android:text="des" />
+                        android:text="des"
+                        android:textColor="@color/white" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -112,22 +120,61 @@
                         android:orientation="horizontal"
                         android:padding="10dp">
 
-                        <TextView
-                            android:id="@+id/ratting_button_overview"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="ratting"
-                            android:visibility="visible" />
-
-                        <TextView
-                            android:id="@+id/pagecount_overview"
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="pagecount" />
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textView8"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="Ratting"
+                                android:textColor="@color/purple_200"
+                                android:textSize="18sp" />
+
+                            <TextView
+                                android:id="@+id/ratting_button_overview"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="ratting"
+                                android:textColor="@color/cool_orange"
+                                android:visibility="visible" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textView9"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="Page"
+                                android:textColor="@color/purple_200"
+                                android:textSize="18sp" />
+
+                            <TextView
+                                android:id="@+id/pagecount_overview"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="pagecount"
+                                android:textColor="@color/cool_orange" />
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -135,7 +182,8 @@
                         android:id="@+id/country_overview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="country" />
+                        android:text="country"
+                        android:textColor="@color/purple_200" />
 
                     <TextView
                         android:id="@+id/moreinfo_overview"
@@ -143,7 +191,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:autoLink="web"
-                        android:text="more info" />
+                        android:text="more info"
+                        android:textColor="@color/white" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -151,6 +200,8 @@
                         android:paddingTop="10dp"
                         android:paddingBottom="10dp"
                         android:text="COMMUNITY REVIEWS "
+                        android:textColor="@color/teal_1000"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <androidx.recyclerview.widget.RecyclerView

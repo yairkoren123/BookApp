@@ -21,6 +21,7 @@ import com.example.bookapp.frags_tabs.Fragment_Search_tab;
 import com.example.bookapp.frags_tabs.Fragment_popular_tab;
 import com.example.bookapp.frags_tabs.VPAdpter;
 import com.example.bookapp.ui.gallery.GalleryViewModel;
+import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
 import org.jetbrains.annotations.NotNull;
@@ -58,9 +59,6 @@ public class SlideshowFragment extends Fragment {
 
     TabLayout tabLayout = getView().findViewById(R.id.tab_lay);
 
-//        TabItem tab_quotes = view.findViewById(R.id.quotes_tab);
-//        TabItem tab_popular = view.findViewById(R.id.popular_tab3);
-//        TabItem tab_search = view.findViewById(R.id.search_tab);
 
         ViewPager viewPager = getView().findViewById(R.id.viewpager_tabs);
 
@@ -74,6 +72,7 @@ public class SlideshowFragment extends Fragment {
         vpAdpter.addFragment(new Fragment_Search_tab());
 
         viewPager.setAdapter(vpAdpter);
+
 
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

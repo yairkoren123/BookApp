@@ -1,15 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#A318CA"
+    android:background="#454545"
     tools:context=".frags_tabs.Fragment_Quotes_tab">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="qoutes" />
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView7"
+            style="@style/Widget.AppCompat.TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Chooze a type of the Quote"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cp_cat"
+            style="@style/Theme.MaterialComponents.DayNight.DarkActionBar.Bridge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_1"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/purple_500"
+                android:text="Love"
+                android:textColor="@color/white" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_2"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/purple_500"
+                android:text="Life"
+                android:textColor="@color/white" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_3"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/purple_500"
+                android:text="Inspirational"
+                android:textColor="@color/white" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_4"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/purple_500"
+                android:text="Humor"
+                android:textColor="@color/white" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_5"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/purple_500"
+                android:text="Philosophy"
+                android:textColor="@color/white" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_6"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/purple_500"
+                android:text="Inspirational"
+                android:textColor="@color/white" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_7"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/purple_500"
+                android:text="Truth"
+                android:textColor="@color/white" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_8"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/purple_500"
+                android:text="Wisdom"
+                android:textColor="@color/white" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_9"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/purple_500"
+                android:text="Hope"
+                android:textColor="@color/white" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="5dp"
+            android:layout_gravity="center"
+            android:layout_margin="4dp"
+            android:backgroundTint="#03dac5"
+            android:elevation="12dp"
+            android:background="@drawable/line_1" />
+
+        <FrameLayout
+            android:id="@+id/mail_countener7"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </FrameLayout>
+
+    </LinearLayout>
+
 
 </FrameLayout>

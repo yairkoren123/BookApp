@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.bookapp.R;
+import com.example.bookapp.fin.Fragment_Quotes_Search;
+import com.example.bookapp.fin.Splash_screen;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -23,5 +25,19 @@ public class Fragment_popular_tab extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_popular_tab, container, false);
+    }
+
+
+    @Override
+    public void onViewCreated(@NonNull @NotNull View view, @Nullable  Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // code here
+
+        Fragment_Quotes_Search myFragment = new Fragment_Quotes_Search();
+        getActivity().getSupportFragmentManager()
+                .beginTransaction().replace(R.id.mail_countener5, myFragment)
+                .addToBackStack(null).commit();
+
     }
 }

@@ -32,6 +32,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 
@@ -121,11 +122,6 @@ public class The_book_Fragment_overview extends Fragment {
 
 
     private class des_back_overview extends AsyncTask<Void,Void,Void> {
-
-
-
-
-
 
         @Override
         protected Void doInBackground(Void... voids) {
@@ -442,11 +438,11 @@ public class The_book_Fragment_overview extends Fragment {
 
             // set the recycler view
 
+            Collections.shuffle(the_reviewsArrayList);
+
 
             recyclerView_REVIEWS.setLayoutManager(layoutManager);
             recyclerView_REVIEWS.setItemAnimator(new DefaultItemAnimator());
-
-
 
             adpterHORIZONTAL1 = new recycler_Adpter_REVIEWS(the_reviewsArrayList,getContext(), getActivity());
             recyclerView_REVIEWS.setAdapter(adpterHORIZONTAL1);

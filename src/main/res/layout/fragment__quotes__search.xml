@@ -3,15 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#454545"
-    tools:context=".frags_tabs.Fragment_popular_tab">
+    tools:context=".fin.Fragment_Quotes_Search">
 
+    <!-- TODO: Update blank fragment layout -->
 
-
-    <FrameLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_quo"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/mail_countener5"/>
-
+        android:layout_height="match_parent" />
 
 </FrameLayout>

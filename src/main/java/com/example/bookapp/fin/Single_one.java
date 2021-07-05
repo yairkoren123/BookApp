@@ -15,12 +15,22 @@ public class Single_one {
 
     The_Book now_in_overview ;
 
+    String  quote_search_now = "";
+
 
     private static final Single_one ourInstance = new Single_one();
     public static Single_one getInstance() {
         return ourInstance;
     }
     private Single_one() { }
+
+    public String getQuote_search_now() {
+        return quote_search_now;
+    }
+
+    public void setQuote_search_now(String quote_search_now) {
+        this.quote_search_now = quote_search_now;
+    }
 
     public The_Book getNow_in_overview() {
         return now_in_overview;
