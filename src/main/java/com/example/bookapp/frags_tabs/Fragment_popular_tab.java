@@ -29,15 +29,32 @@ public class Fragment_popular_tab extends Fragment {
 
 
     @Override
-    public void onViewCreated(@NonNull @NotNull View view, @Nullable  Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        // code here
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         Fragment_Quotes_Search myFragment = new Fragment_Quotes_Search();
         getActivity().getSupportFragmentManager()
                 .beginTransaction().replace(R.id.mail_countener5, myFragment)
                 .addToBackStack(null).commit();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull @NotNull View view, @Nullable  Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // code here
+
+
+//        Fragment_Quotes_Search myFragment = new Fragment_Quotes_Search();
+//        getActivity().getSupportFragmentManager()
+//                .beginTransaction().replace(R.id.mail_countener5, myFragment)
+//                .addToBackStack(null).commit();
 
     }
+
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//
+//    }
 }

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import android.view.ViewGroup;
 import com.example.bookapp.R;
 import com.example.bookapp.books_class.The_Quotes;
 import com.example.bookapp.frags_tabs.recycler_Adpter_Quotes;
+import com.example.bookapp.ui.gallery.Search_book_Fragment;
 
 import org.jetbrains.annotations.NotNull;
 import org.jsoup.Jsoup;
@@ -34,6 +36,9 @@ public class Fragment_Quotes_Search extends Fragment {
     // https://www.goodreads.com/search?utf8=%E2%9C%93&q=see2&search_type=quotes
     String need_to_tag = "popular";
     String get_tag_search = "good";
+
+
+    Fragment myFragment;
 
     String chip_tag = "";
     String a = "0";
@@ -101,6 +106,31 @@ public class Fragment_Quotes_Search extends Fragment {
         layoutManager = new LinearLayoutManager(
                 getActivity(),LinearLayoutManager.VERTICAL
                 ,false);
+
+        Splash_screen_2 myFragment = new Splash_screen_2();
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.mail_countener8, myFragment, "findThisFragment")
+                .addToBackStack(null)
+                .commit();
+        Log.d("fag", "run: 1");
+
+
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.d("fag2", "run: 1");
+                        getActivity().getSupportFragmentManager().beginTransaction().remove(myFragment).commit();
+                    }
+                },1000);
+
+            }
+        },1000);
+
 
 
         des_back_Quotes des_back_quotes = new des_back_Quotes();

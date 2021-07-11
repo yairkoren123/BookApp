@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#454545"
+    android:background="@color/blue_700"
     tools:context=".ui.home.HomeFragment">
 
     <ScrollView
@@ -173,7 +173,7 @@
     </FrameLayout>
 
     <FrameLayout
-        android:id="@+id/mail_countener2"
+        android:id="@+id/mail_countener12"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="visible"

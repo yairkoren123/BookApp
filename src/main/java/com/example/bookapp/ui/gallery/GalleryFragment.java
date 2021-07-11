@@ -1,10 +1,8 @@
 package com.example.bookapp.ui.gallery;
 
 import android.app.Activity;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.StrictMode;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,31 +10,22 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
+
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.airbnb.lottie.LottieAnimationView;
 import com.example.bookapp.R;
 import com.example.bookapp.books_class.The_Book;
 import com.example.bookapp.databinding.FragmentGalleryBinding;
 import com.example.bookapp.fin.Single_one;
 import com.example.bookapp.fin.Splash_screen;
-import com.example.bookapp.ui.home.HomeFragment;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class GalleryFragment extends Fragment {
-    // search
+
+    // Search
 
 
     String URL = "https://www.goodreads.com/search?utf8=%E2%9C%93&q=java&search_type=books";
@@ -65,7 +54,7 @@ public class GalleryFragment extends Fragment {
         binding = FragmentGalleryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         single_one = Single_one.getInstance();
-        single_one.setNow_drow("search");
+        //single_one.setNow_drow("search");
 
         ImageButton imageButton = binding.imagebuttonSearch;
         EditText to_search_view = binding.editTextSearch;
@@ -77,8 +66,9 @@ public class GalleryFragment extends Fragment {
 
         myFragment = new Splash_screen();
         getActivity().getSupportFragmentManager()
-                .beginTransaction().add(R.id.mail_countener4, myFragment)
-                .addToBackStack(null).commit();
+                .beginTransaction().replace(R.id.mail_countener10, myFragment)
+                .addToBackStack(null)
+                .commit();
 
 
         imageButton.setOnClickListener(new View.OnClickListener() {
@@ -95,7 +85,7 @@ public class GalleryFragment extends Fragment {
 
                     Search_book_Fragment nextFrag = new Search_book_Fragment(URL);
                     getActivity().getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.mail_countener2, nextFrag, "findThisFragment")
+                            .replace(R.id.mail_countener12, nextFrag, "findThisFragment")
                             .addToBackStack(null)
                             .commit();
 
@@ -118,7 +108,7 @@ public class GalleryFragment extends Fragment {
             public void run() {
                 Search_book_Fragment nextFrag = new Search_book_Fragment(URL);
                 getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.mail_countener2, nextFrag, "findThisFragment")
+                        .add(R.id.mail_countener12, nextFrag, "findThisFragment")
                         .addToBackStack(null)
                         .commit();
                 Log.d("fag", "run: 1");
@@ -127,7 +117,8 @@ public class GalleryFragment extends Fragment {
                     @Override
                     public void run() {
                         Log.d("fag2", "run: 1");
-                        getActivity().getSupportFragmentManager().beginTransaction().remove(myFragment).commit();
+                        getActivity().getSupportFragmentManager().
+                                beginTransaction().remove(myFragment).commit();
                     }
                 },1000);
 

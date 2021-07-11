@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +42,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class HomeFragment extends Fragment {
+
     // main
 
     private HomeViewModel homeViewModel;
@@ -113,16 +115,6 @@ public class HomeFragment extends Fragment {
         Log.d("meme", "onCreateView: ");
 
 
-        myFragment = new Splash_screen();
-        getActivity().getSupportFragmentManager()
-                .beginTransaction().add(R.id.mail_countener1, myFragment)
-                .addToBackStack(null).commit();
-
-
-
-
-
-
 
         recyclerView1 = binding.recyclerView1;
         recyclerView2 = binding.recyclerView2;
@@ -140,6 +132,12 @@ public class HomeFragment extends Fragment {
             public void onChanged(@Nullable String s) {
             }
         });
+
+
+
+//        des_back des_back = new des_back();
+//        des_back.execute();
+
         return root;
     }
 
@@ -147,8 +145,12 @@ public class HomeFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+
+
         Single_one single_one = Single_one.getInstance();
         single_one.setSavedInstanceState(savedInstanceState);
+
 
 
 
@@ -161,13 +163,33 @@ public class HomeFragment extends Fragment {
         String[] cat = new String[]
                 {"Fantasy","History","Horror","Music","Mystery","Sports","Travel"};
 
-
-
         for (String head : cat){
             Subject_Headings.add(head);
         }
 
         //getBooks();
+
+    }
+
+    @Override
+    public void onResume() {
+        Log.d("resu", "onResume: 1" );
+
+        Subject_Headings = new ArrayList<>();
+
+        String[] cat = new String[]
+                {"Fantasy","History","Horror","Music","Mystery","Sports","Travel"};
+
+        for (String head : cat){
+            Subject_Headings.add(head);
+        }
+
+        rec_now = 1;
+
+        myFragment = new Splash_screen();
+        getActivity().getSupportFragmentManager()
+                .beginTransaction().add(R.id.mail_countener1, myFragment)
+                .addToBackStack(null).commit();
 
 
         new Handler().postDelayed(new Runnable() {
@@ -175,25 +197,21 @@ public class HomeFragment extends Fragment {
             public void run() {
                 des_back des_back = new des_back();
                 des_back.execute();
-                Log.d("fag", "run: 1");
+                Log.d("fag1", "run: 1");
 
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Log.d("fag2", "run: 1");
-                        getActivity().getSupportFragmentManager().beginTransaction().remove(myFragment).commit();
+                        Log.d("fag22", "run: 1");
+                        getActivity().getSupportFragmentManager().beginTransaction()
+                                .remove(myFragment).commit();
+
                     }
-                },3000);
+                },1000);
 
             }
-        },3000);
-//        des_back des_back = new des_back();
-//        des_back.execute();
+        },2000);
 
-    }
-
-    @Override
-    public void onResume() {
         super.onResume();
 
     }
@@ -268,7 +286,8 @@ public class HomeFragment extends Fragment {
                 @Override
                 public void run() {
 
-                    for (int i = 0; i < 2; i++) {
+
+                    for (int i = 0; i < 4; i++) {
 
 
                         Random r = new Random();
@@ -375,6 +394,8 @@ public class HomeFragment extends Fragment {
                 layoutManager = new LinearLayoutManager(
                         getActivity(),LinearLayoutManager.HORIZONTAL
                         ,false);
+
+                Log.d("towaitch", "get_by_cat: " + rec_now);
                     switch (rec_now){
                         case 1:
 

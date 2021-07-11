@@ -156,21 +156,5 @@ public class Fragment_REVIEWS extends Fragment {
         ratting_of_rev.playAnimation();
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }

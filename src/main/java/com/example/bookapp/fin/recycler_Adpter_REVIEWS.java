@@ -89,8 +89,18 @@ public class recycler_Adpter_REVIEWS extends RecyclerView.Adapter<recycler_Adpte
             @Override
             public void onClick(View v) {
                 AppCompatActivity activity = (AppCompatActivity) context;
-                Fragment_REVIEWS myFragment = new Fragment_REVIEWS(selected_rev);
-                activity.getSupportFragmentManager().beginTransaction().add(R.id.mail_countener1, myFragment).addToBackStack(null).commit();
+                Single_one single_one = Single_one.getInstance();
+
+                if (single_one.getNow_drow().equals("home")){
+                    Fragment_REVIEWS myFragment = new Fragment_REVIEWS(selected_rev);
+                    activity.getSupportFragmentManager().beginTransaction().add(R.id.mail_countener12,
+                            myFragment).addToBackStack(null).commit();
+                }else {
+                    Fragment_REVIEWS myFragment = new Fragment_REVIEWS(selected_rev);
+                    activity.getSupportFragmentManager().beginTransaction().add(R.id.reviews_mail1,
+                            myFragment).addToBackStack(null).commit();
+                }
+
 
 
                 Log.d("adpterwork", "onClick: yes  on rev");

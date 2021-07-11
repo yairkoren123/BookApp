@@ -20,8 +20,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.airbnb.lottie.LottieComposition;
-import com.airbnb.lottie.LottieOnCompositionLoadedListener;
 import com.example.bookapp.R;
 import com.example.bookapp.books_class.The_Book;
 import com.example.bookapp.fin.The_book_Fragment_overview;
@@ -50,13 +48,6 @@ public class Search_book_Fragment extends Fragment {
 
     int search_size = 15;
     boolean stars_there[] = new boolean[search_size];
-
-
-
-
-
-
-
 
 
     public Search_book_Fragment() {
@@ -102,12 +93,7 @@ public class Search_book_Fragment extends Fragment {
 
                 @Override
                 public void run() {
-
-
                         get_by_search(URL);
-
-
-
                 }
             });
 
@@ -226,7 +212,7 @@ public class Search_book_Fragment extends Fragment {
 
                     The_book_Fragment_overview nextFrag = new The_book_Fragment_overview(send_book);
                     getActivity().getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.mail_countener3, nextFrag, "findThisFragment")
+                            .replace(R.id.mail_countener33, nextFrag, "findThisFragment")
                             .addToBackStack(null)
                             .commit();
                 }

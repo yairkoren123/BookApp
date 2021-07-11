@@ -10,6 +10,15 @@
     <ListView
         android:id="@+id/itemListView_book"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent" >
+
+    </ListView>
+
+    <FrameLayout
+        android:id="@+id/mail_countener33"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
 
 </FrameLayout>

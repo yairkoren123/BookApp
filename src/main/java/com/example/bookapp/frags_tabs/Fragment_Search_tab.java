@@ -23,9 +23,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class Fragment_Search_tab extends Fragment {
 
-    String text = "";
-    ImageButton imageButton;
-    EditText editText;
+    String text = "" ;
+    ImageButton imageButton ;
+    EditText editText ;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,11 +41,6 @@ public class Fragment_Search_tab extends Fragment {
         // code here
 
         text = "life";
-        Fragment_Quotes_Search myFragment = new Fragment_Quotes_Search("search",text);
-                    getActivity().getSupportFragmentManager()
-                            .beginTransaction().replace(R.id.mail_countener6, myFragment)
-                            .addToBackStack(null).commit();
-
 
 
         imageButton = view.findViewById(R.id.imageButton_search_qoutes);
@@ -84,5 +79,12 @@ public class Fragment_Search_tab extends Fragment {
             view = new View(activity);
         }
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
+    }
+
+    @Override
+    public void onPause() {
+        onDestroy();
+        //super.onPause();
     }
 }

@@ -14,8 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -36,7 +38,7 @@ import java.util.Collections;
 import java.util.Random;
 
 
-public class The_book_Fragment_overview extends Fragment {
+public class The_book_Fragment_overview extends Fragment{
 
     The_Book selected_book = new The_Book();
 
@@ -301,18 +303,9 @@ public class The_book_Fragment_overview extends Fragment {
                     Log.d("rev_date", "start_overview: " + rev_date);
                     the_reviews.setDate(rev_date);
 
-
-
                     the_reviewsArrayList.add(the_reviews);
 
-
-
-
                 }
-
-
-
-
 
 
             }catch (Exception e ){
@@ -422,7 +415,8 @@ public class The_book_Fragment_overview extends Fragment {
             book_image.setVisibility(View.VISIBLE);
             Log.d("Fimage", "onViewCreated: " + image);
 
-            //Glide.with(getContext()).load(image).placeholder(R.drawable.ic_baseline_book_24).dontAnimate().into(book_image);
+            //Glide.with(getContext()).load(image).placeholder(R.drawable.ic_baseline_book_24)
+            // .dontAnimate().into(book_image);
 
 
             Picasso.get().load(image)
@@ -444,8 +438,12 @@ public class The_book_Fragment_overview extends Fragment {
             recyclerView_REVIEWS.setLayoutManager(layoutManager);
             recyclerView_REVIEWS.setItemAnimator(new DefaultItemAnimator());
 
+
+
             adpterHORIZONTAL1 = new recycler_Adpter_REVIEWS(the_reviewsArrayList,getContext(), getActivity());
             recyclerView_REVIEWS.setAdapter(adpterHORIZONTAL1);
+
+
 
         }
 

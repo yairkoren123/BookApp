@@ -1,9 +1,13 @@
 package com.example.bookapp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.WindowManager;
 
 import com.example.bookapp.fin.Loadding_book_activity;
 import com.example.bookapp.fin.Single_one;
@@ -43,10 +47,6 @@ public class MainActivity extends AppCompatActivity {
 //        Intent intent = new Intent(MainActivity.this, Loadding_book_activity.class);
 //        startActivity(intent);
 
-
-
-
-
         setSupportActionBar(binding.appBarMain.toolbar);
 
 
@@ -55,12 +55,22 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                R.id.nav_home,
+                R.id.nav_gallery,
+                R.id.nav_slideshow)
                 .setDrawerLayout(drawer)
                 .build();
+
+
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+
+        Single_one single_one = Single_one.getInstance();
+        single_one.setNow_drow("home");
+
+
     }
 
     @Override
@@ -85,17 +95,37 @@ public class MainActivity extends AppCompatActivity {
         String now = single_one.getNow_drow();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
+        Log.d("wwww", "onBackPressed: " + now);
+
+
         if (now.equals("home")) {
-            super.onBackPressed();
 
-        } else if (now.equals("overview_search")) {
-            super.onBackPressed();
+            new AlertDialog.Builder(this)
+                    .setIcon(R.drawable.ic_baseline_priority_high_24)
+                    .setTitle("EXIT")
+                    .setMessage("Are you sure you want to EXIT ?")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // close the app
+                            finish();
+                        }
 
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
 
+        }else {
 
-        } else {
             super.onBackPressed();
 
         }
+
+
+
+
+
+
+
     }
 }
