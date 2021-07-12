@@ -21,6 +21,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/one_rev_name">
 
+
             <LinearLayout
                 android:id="@+id/linearLayout2"
                 android:layout_width="wrap_content"
@@ -81,14 +82,16 @@
             android:id="@+id/one_bookName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:padding="10dp"
             android:text="name of book"
             android:textColor="@color/teal_1000"
             android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/back_imageview_rev" />
 
         <ScrollView
             android:layout_width="0dp"
@@ -136,6 +139,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/one_bookName" />
+
+        <ImageView
+            android:id="@+id/back_imageview_rev"
+            android:layout_width="50dp"
+
+            android:layout_height="50dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_baseline_arrow_back_ios_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

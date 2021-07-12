@@ -9,218 +9,10 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:clickable="true">
 
-        <ImageView
-            android:id="@+id/book_image_front_overview"
-            android:layout_width="130dp"
-            android:layout_height="200dp"
-            android:layout_marginStart="36dp"
-            android:layout_marginTop="36dp"
-            android:scaleType="fitXY"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/backgrounds/scenic" />
-
-        <TextView
-            android:id="@+id/title_overview"
-            android:layout_width="140dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="52dp"
-            android:layout_marginEnd="36dp"
-            android:text="name of the book"
-            android:textColor="@color/teal_1000"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/book_image_front_overview"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/ratting_overview_top"
-            android:layout_width="150dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="36dp"
-            android:text="ratting"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/book_image_front_overview"
-            app:layout_constraintTop_toBottomOf="@+id/title_overview" />
-
-        <TextView
-            android:id="@+id/year_overview"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="8dp"
-            android:text="year"
-            android:textColor="@color/teal_700"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/book_image_front_overview"
-            app:layout_constraintTop_toBottomOf="@+id/ratting_overview_top" />
-
-        <TextView
-            android:id="@+id/len_overview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/bg_round"
-            android:padding="6dp"
-            android:text="len"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.69"
-            app:layout_constraintStart_toEndOf="@+id/book_image_front_overview"
-            app:layout_constraintTop_toBottomOf="@+id/year_overview" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout7"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="8dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.05"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/len_overview">
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/wirtes_overview"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp"
-                        android:text="wirtes"
-                        android:textColor="@color/teal_700" />
-
-                    <TextView
-                        android:id="@+id/des_overview"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/open_sans_semibold"
-                        android:text="des"
-                        android:textColor="@color/white" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:padding="10dp">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/textView8"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="Ratting"
-                                android:textColor="@color/purple_200"
-                                android:textSize="18sp" />
-
-                            <TextView
-                                android:id="@+id/ratting_button_overview"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_gravity="center"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="ratting"
-                                android:textColor="@color/cool_orange"
-                                android:visibility="visible" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/textView9"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="Page"
-                                android:textColor="@color/purple_200"
-                                android:textSize="18sp" />
-
-                            <TextView
-                                android:id="@+id/pagecount_overview"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="pagecount"
-                                android:textColor="@color/cool_orange" />
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/country_overview"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="country"
-                        android:textColor="@color/purple_200" />
-
-                    <TextView
-                        android:id="@+id/moreinfo_overview"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:autoLink="web"
-                        android:text="more info"
-                        android:textColor="@color/white" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:text="COMMUNITY REVIEWS "
-                        android:textColor="@color/teal_1000"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerview_REVIEWS_overview"
-
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="4dp"
-                        android:background="@android:color/transparent"
-                        android:backgroundTint="@android:color/transparent" />
-                </LinearLayout>
-            </ScrollView>
-
-        </LinearLayout>
-
-        <FrameLayout
-            android:id="@+id/reviews_mail1"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -228,8 +20,273 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <ImageView
+                    android:id="@+id/back_imageview_rev"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/ic_baseline_arrow_back_ios_24"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                android:id="@+id/book_image_front_overview"
+                android:layout_width="130dp"
+                android:layout_height="200dp"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="36dp"
+                android:scaleType="fitXY"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/backgrounds/scenic" />
+
+                <TextView
+                    android:id="@+id/title_overview"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="name of the book"
+                    android:textColor="@color/teal_1000"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/book_image_front_overview"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout8_ratting_top_overview"
+                android:layout_width="200dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/book_image_front_overview"
+                app:layout_constraintTop_toBottomOf="@+id/title_overview">>
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/ratting_overview_top"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:text="ratting" />
+
+                <TextView
+                    android:id="@+id/total_ratting_overview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:autoLink="web"
+                    android:gravity="center"
+                    android:inputType="textMultiLine"
+                    android:linksClickable="true"
+                    android:text="(445)"
+                    android:textColor="@color/cool_orange"
+                    android:textSize="17sp" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/year_overview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="year"
+                android:textColor="@color/teal_700"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/book_image_front_overview"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout8_ratting_top_overview" />
+
+            <TextView
+                android:id="@+id/len_overview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_round"
+                android:padding="6dp"
+                android:text="len"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.69"
+                app:layout_constraintStart_toEndOf="@+id/book_image_front_overview"
+                app:layout_constraintTop_toBottomOf="@+id/year_overview" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/len_overview">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/wirtes_overview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:text="wirtes"
+                            android:textColor="@color/teal_700" />
+
+                        <TextView
+                            android:id="@+id/des_overview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/open_sans_semibold"
+                            android:text="des"
+                            android:textColor="@color/white" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:padding="10dp">
+
+                            <LinearLayout
+                                android:id="@+id/linear_ratting_overview"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/textView8"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:text="Ratting"
+                                    android:textColor="@color/purple_200"
+                                    android:textSize="18sp" />
+
+                                <TextView
+                                    android:id="@+id/ratting_button_overview"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:text="ratting"
+                                    android:textColor="@color/cool_orange"
+                                    android:visibility="visible" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/linear_pagecount_overview"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/textView9"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:text="Page"
+                                    android:textColor="@color/purple_200"
+                                    android:textSize="18sp" />
+
+                                <TextView
+                                    android:id="@+id/pagecount_overview"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:text="pagecount"
+                                    android:textColor="@color/cool_orange" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/count_people_ratting_overview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="ratting people"
+                            android:textColor="@color/purple_200" />
+
+                        <TextView
+                            android:id="@+id/moreinfo_overview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:autoLink="web"
+                            android:text="more info"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:text="COMMUNITY REVIEWS "
+                            android:textColor="@color/teal_1000"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerview_REVIEWS_overview"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="4dp"
+                            android:background="@android:color/transparent"
+                            android:backgroundTint="@android:color/transparent" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        <FrameLayout
+            android:id="@+id/reviews_mail1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
         </FrameLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <FrameLayout
+            android:id="@+id/pie_mail1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        </FrameLayout>
+    </FrameLayout>
