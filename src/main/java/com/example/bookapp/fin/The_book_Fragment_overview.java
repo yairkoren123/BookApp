@@ -1,12 +1,14 @@
 package com.example.bookapp.fin;
 
-import android.net.Uri;
+import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,15 +16,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.bumptech.glide.Glide;
+import com.example.bookapp.Fragment_Pie;
 import com.example.bookapp.R;
 import com.example.bookapp.books_class.The_Book;
 import com.example.bookapp.books_class.The_REVIEWS;
@@ -35,10 +36,11 @@ import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
 
 
 public class The_book_Fragment_overview extends Fragment{
+
+    String final_pie_value = "";
 
     The_Book selected_book = new The_Book();
 
@@ -47,6 +49,9 @@ public class The_book_Fragment_overview extends Fragment{
     recycler_Adpter_REVIEWS adpterHORIZONTAL1;
 
     LinearLayoutManager layoutManager;
+
+    // for the pie
+    ArrayList<Integer> pie_ArrayList_main =  new ArrayList<>();
 
 
 
@@ -58,8 +63,12 @@ public class The_book_Fragment_overview extends Fragment{
     LottieAnimationView ratting;
     RecyclerView recyclerView_REVIEWS;
 
-    TextView title,year,description,len,pagecount,info,authors, category , ratting_button, country;
-    ImageView book_image;
+    TextView title,year,description,len,pagecount,info,authors, ratting_people_sum , ratting_button, country, ratting_top;
+    ImageView book_image , backbutton;
+
+    LinearLayout no_pages_linear;
+    LinearLayout ratting_linear;
+    LinearLayout ratting_top_linear;
 
     Single_one single_one = Single_one.getInstance();
 
@@ -94,6 +103,8 @@ public class The_book_Fragment_overview extends Fragment{
     public void onViewCreated(@NonNull @NotNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        backbutton = view.findViewById(R.id.back_imageview_rev);
+
         single_one = Single_one.getInstance();
         if (single_one.getNow_drow().equals("home")){
             single_one.setNow_drow("overview_home");
@@ -101,6 +112,7 @@ public class The_book_Fragment_overview extends Fragment{
         }else {
             single_one.setNow_drow("overview_search");
         }
+        ratting_top = view.findViewById(R.id.total_ratting_overview);
         title = view.findViewById(R.id.title_overview);
         year = view.findViewById(R.id.year_overview);
         description = view.findViewById(R.id.des_overview);
@@ -112,7 +124,11 @@ public class The_book_Fragment_overview extends Fragment{
         ratting = view.findViewById(R.id.ratting_overview_top);
         ratting_button = view.findViewById(R.id.ratting_button_overview);
         len = view.findViewById(R.id.len_overview);
-        country = view.findViewById(R.id.country_overview);
+        ratting_people_sum = view.findViewById(R.id.count_people_ratting_overview);
+
+        no_pages_linear = view.findViewById(R.id.linear_pagecount_overview);
+        ratting_linear = view.findViewById(R.id.linear_ratting_overview);
+        ratting_top_linear = view.findViewById(R.id.linearLayout8_ratting_top_overview);
 
         book_image = view.findViewById(R.id.book_image_front_overview);
 
@@ -170,12 +186,46 @@ public class The_book_Fragment_overview extends Fragment{
 
 
                 org.jsoup.nodes.Document doc = Jsoup.connect(Url)
-                        .timeout(6000).get();
+                        .timeout(10000).get();
 
                 Log.d("HTML1", "start_overview: " + doc.outerHtml());
 
 
+
+
+                // for the book
+
                 org.jsoup.select.Elements body = doc.select("div.leftContainer");
+
+
+                // for the pie
+                org.jsoup.select.Elements pie_values_main = doc.select("span.rating_graph script");
+
+                Log.d("pie_value_main", "start_overview: " + pie_values_main.outerHtml());
+
+                String str = pie_values_main.toString();
+                Log.d("pie_value_main", "start_overview: " + str);
+
+                // split the :  renderRatingGraph([5556, 3604, 1595, 349, 100]);
+
+                String[] wow1 = str.split("\\[");
+
+                Log.d("pie_value_main", "start_overview: " + wow1[1]);
+
+                wow1 = wow1[1].split("]");
+
+                Log.d("pie_value_main", "start_overview: " + wow1[0]);
+
+                final_pie_value= wow1[0];
+
+                final_pie_value = final_pie_value.replace(" ","");
+
+                wow1 = final_pie_value.split(",");
+
+                // add values
+                for (String item : wow1){
+                    pie_ArrayList_main.add(Integer.valueOf(item));
+                }
 
                 String title_overview = body.select("h1.gr-h1").text();
                 String dsc_overview = body.select("div.readable span").text();
@@ -213,23 +263,34 @@ public class The_book_Fragment_overview extends Fragment{
                 String pages_count_from_el = "";
                 String len_st = "";
 
+                Log.d("error", "start_overview: " + num_pages_el.size());
 
-                for (int i = 0; i < num_pages_el.size(); i++) {
-                    Element f = num_pages_el.get(i);
+                if (num_pages_el != null) {
+                    Log.d("error", "start_overview: ");
 
-
-                    if (i == 0) {
-                        String wow[] = f.text().split(",");
-                        Log.d("gtenumber_page", "start_overview: " + wow[1]);
-                        String page_amount = wow[1];
-                        selected_book.setPageCount(page_amount);
-                        Log.d("gtenumber_page", "start_overview: " + page_amount);
+                    for (int i = 0; i < num_pages_el.size(); i++) {
+                        Element f = num_pages_el.get(i);
 
 
-                    }
-                    if (i == 1) {
-                        Log.d("gtenumber_page", "start_overview: " + f.text());
-                        selected_book.setPublishedDate(f.text());
+                        if (i == 0) {
+
+                            if (f.text().contains(",")) {
+                                String wow[] = f.text().split(",");
+                                Log.d("gtenumber_page", "start_overview: " + wow[1]);
+                                String page_amount = wow[1];
+                                selected_book.setPageCount(page_amount);
+                                Log.d("gtenumber_page", "start_overview: " + page_amount);
+                            }else {
+                                selected_book.setPageCount("");
+                            }
+                            Log.d("gtenumber_page", "start_overview: " + "");
+
+
+                        }
+                        if (i == 1) {
+                            Log.d("gtenumber_page", "start_overview: " + f.text());
+                            selected_book.setPublishedDate(f.text());
+                        }
                     }
                 }
                 selected_book.setInfoLink(Url);
@@ -246,7 +307,11 @@ public class The_book_Fragment_overview extends Fragment{
 
 
                 selected_book.setAverageRating(p_ratting);
+
+
                 selected_book.setLanguage(len_st);
+
+                // TODO PEOPLE COUNT
                 selected_book.setPeople_ratting(people_count_ratting);
                 selected_book.setDescription(dsc_overview);
 
@@ -306,6 +371,9 @@ public class The_book_Fragment_overview extends Fragment{
                     the_reviewsArrayList.add(the_reviews);
 
                 }
+                // array for the pie
+
+
 
 
             }catch (Exception e ){
@@ -343,10 +411,18 @@ public class The_book_Fragment_overview extends Fragment{
 
 
             description.setText(selected_book.getDescription());
-            country.setText(selected_book.getCountry());
 
             String the_page_count = String.valueOf(selected_book.getPageCount());
-            pagecount.setText(the_page_count);
+
+            if (the_page_count.equals("")){
+                // empty
+                no_pages_linear.setVisibility(View.GONE);
+
+            }else {
+                // not empty
+                pagecount.setText(the_page_count);
+
+            }
 
             info.setText("More Info here : " + selected_book.getInfoLink());
 
@@ -356,6 +432,8 @@ public class The_book_Fragment_overview extends Fragment{
             Log.d("Fwiters", "onViewCreated: " + selected_book.getAuthors());
 
             String theActors = selected_book.getAuthors();
+
+            Log.d("avg_p", "start_overview: " + selected_book.getPeople_ratting());
 
 
 
@@ -402,13 +480,20 @@ public class The_book_Fragment_overview extends Fragment{
 
 
             ratting_button.setText(selected_book.getAverageRating());
+            ratting_people_sum.setText(selected_book.getPeople_ratting() + " ratings");
+            ratting_top.setText("(" + selected_book.getAverageRating() + ")");
+            ratting_top.setPaintFlags(ratting_top.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
             if (ratting_button.getText().equals("")) {
                 ratting_button.setVisibility(View.GONE);
             }
-            len.setText(selected_book.getLanguage());
 
+            if (selected_book.getLanguage().equals("")){
+                len.setVisibility(View.INVISIBLE);
 
+            }else {
+                len.setText(selected_book.getLanguage());
+            }
 
             String image;
             image = selected_book.getImagesfront();
@@ -430,6 +515,19 @@ public class The_book_Fragment_overview extends Fragment{
             Single_one single_one = Single_one.getInstance();
             single_one.setNow_in_overview(selected_book);
 
+
+
+            // click to see the pie for normal ratting
+
+            ratting_top.setOnClickListener(v -> callPieFragment());
+
+            ratting_top_linear.setOnClickListener(v -> callPieFragment());
+
+            ratting_linear.setOnClickListener(v -> callPieFragment());
+
+            backbutton.setOnClickListener(v -> callclose());
+
+
             // set the recycler view
 
             Collections.shuffle(the_reviewsArrayList);
@@ -443,15 +541,41 @@ public class The_book_Fragment_overview extends Fragment{
             adpterHORIZONTAL1 = new recycler_Adpter_REVIEWS(the_reviewsArrayList,getContext(), getActivity());
             recyclerView_REVIEWS.setAdapter(adpterHORIZONTAL1);
 
+        }
+        private void callPieFragment(){
 
+            Log.d("newFrag", "callPieFragment: start the pie");
+            Fragment_Pie nextFrag = new Fragment_Pie(pie_ArrayList_main);
+
+            // call pie fragment
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.pie_mail1, nextFrag, "findThisFragment")
+                    .addToBackStack(null)
+                    .commit();
+        }
+
+        private void callclose(){
+
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.remove(The_book_Fragment_overview.this).commit();
+            single_one = Single_one.getInstance();
+            if (single_one.isIn_search_book()) {
+
+            } else {
+                getActivity().onBackPressed();
+                single_one.setNow_drow("home");
+            }
 
         }
 
-
     }
+}
 
 
 
 
 
-    }
+
+
+

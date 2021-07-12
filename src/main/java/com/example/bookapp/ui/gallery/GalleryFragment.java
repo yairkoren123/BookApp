@@ -56,6 +56,8 @@ public class GalleryFragment extends Fragment {
         single_one = Single_one.getInstance();
         //single_one.setNow_drow("search");
 
+        single_one.setIn_search_book(true);
+
         ImageButton imageButton = binding.imagebuttonSearch;
         EditText to_search_view = binding.editTextSearch;
 

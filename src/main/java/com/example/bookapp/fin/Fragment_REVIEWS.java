@@ -5,11 +5,14 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -22,6 +25,10 @@ import org.jetbrains.annotations.NotNull;
 
 public class Fragment_REVIEWS extends Fragment {
 
+    // layout
+
+    ImageView back_imageview;
+
     The_REVIEWS the_reviews =  new The_REVIEWS();
 
     The_Book selected_book;
@@ -29,6 +36,8 @@ public class Fragment_REVIEWS extends Fragment {
     LottieAnimationView ratting_of_book;
 
     LottieAnimationView ratting_of_rev;
+
+    Single_one single_one = Single_one.getInstance();
 
 
     public Fragment_REVIEWS() {
@@ -63,6 +72,7 @@ public class Fragment_REVIEWS extends Fragment {
         Single_one single_one = Single_one.getInstance();
         selected_book = single_one.getNow_in_overview();
 
+        back_imageview = view.findViewById(R.id.back_imageview_rev);
         TextView name_book = view.findViewById(R.id.one_bookName);
         TextView date = view.findViewById(R.id.one_date);
         TextView rev_name = view.findViewById(R.id.one_rev_name);
@@ -155,6 +165,23 @@ public class Fragment_REVIEWS extends Fragment {
         }
         ratting_of_rev.playAnimation();
 
+        // click on back button
+        back_imageview.setOnClickListener(v -> callclose());
+
+
+    }
+
+    private void callclose(){
+
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.remove(Fragment_REVIEWS.this).commit();
+        single_one = Single_one.getInstance();
+        if (single_one.isIn_search_book()) {
+
+        } else {
+            getActivity().onBackPressed();
+        }
 
     }
 }

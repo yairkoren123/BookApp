@@ -4,6 +4,8 @@ import android.os.Bundle;
 
 import com.example.bookapp.books_class.The_Book;
 
+import java.util.ArrayList;
+
 public class Single_one {
 
     String JsonURL = "https://www.googleapis.com/books/v1/volumes?q=java&key=AIzaSyCmCQHzatVef3haHHXk6RWwYroWt-flbU0&maxResults=10";
@@ -11,11 +13,24 @@ public class Single_one {
 
     Bundle savedInstanceState;
 
+    boolean first_time = true;
+
+    boolean in_search_book = false;
+
     String now_drow = "home";
 
     The_Book now_in_overview ;
 
     String  quote_search_now = "";
+
+    ArrayList<The_Book> title1 = new ArrayList<>();
+    ArrayList<The_Book> title2 = new ArrayList<>();
+    ArrayList<The_Book> title3 = new ArrayList<>();
+    ArrayList<The_Book> title4 = new ArrayList<>();
+    ArrayList<The_Book> title5 = new ArrayList<>();
+
+    ArrayList<String> final_titles = new ArrayList<>();
+
 
 
     private static final Single_one ourInstance = new Single_one();
@@ -62,5 +77,77 @@ public class Single_one {
 
     public void setSavedInstanceState(Bundle savedInstanceState) {
         this.savedInstanceState = savedInstanceState;
+    }
+
+
+
+    // save the automatic book in single ones
+
+
+    public ArrayList<The_Book> getTitle1() {
+        return title1;
+    }
+
+    public void setTitle1(ArrayList<The_Book> title1) {
+        this.title1 = title1;
+    }
+
+    public ArrayList<The_Book> getTitle2() {
+        return title2;
+    }
+
+    public void setTitle2(ArrayList<The_Book> title2) {
+        this.title2 = title2;
+    }
+
+    public ArrayList<The_Book> getTitle3() {
+        return title3;
+    }
+
+    public void setTitle3(ArrayList<The_Book> title3) {
+        this.title3 = title3;
+    }
+
+    public ArrayList<The_Book> getTitle4() {
+        return title4;
+    }
+
+    public void setTitle4(ArrayList<The_Book> title4) {
+        this.title4 = title4;
+    }
+
+    public ArrayList<The_Book> getTitle5() {
+        return title5;
+    }
+
+    public void setTitle5(ArrayList<The_Book> title5) {
+        this.title5 = title5;
+    }
+
+    public ArrayList<String> getFinal_titles() {
+        return final_titles;
+    }
+
+    public void setFinal_titles(ArrayList<String> final_titles) {
+        this.final_titles = final_titles;
+    }
+
+    // first time come to the app :
+
+
+    public boolean isFirst_time() {
+        return first_time;
+    }
+
+    public void setFirst_time(boolean first_time) {
+        this.first_time = first_time;
+    }
+
+    public boolean isIn_search_book() {
+        return in_search_book;
+    }
+
+    public void setIn_search_book(boolean in_search_book) {
+        this.in_search_book = in_search_book;
     }
 }

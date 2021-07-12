@@ -77,9 +77,20 @@ public class recycler_Adpter_REVIEWS extends RecyclerView.Adapter<recycler_Adpte
 
         holder.text_de.setText(Html.fromHtml(des+ "... " + "<font color='yellow'> <u>(View More)</u></font>"));
 
-        holder.likes.setText(selected_rev.getLikes());
+        if (selected_rev.getLikes().equals("")){
+            holder.likes.setVisibility(View.INVISIBLE);
+        }else {
+            holder.likes.setText(selected_rev.getLikes());
+        }
+
         holder.username.setText(selected_rev.getName());
-        holder.stars_avg.setText(" Final Review : "+selected_rev.getStars());
+
+        if (selected_rev.getStars().equals("")){
+            holder.stars_avg.setVisibility(View.INVISIBLE);
+        }else {
+
+            holder.stars_avg.setText(" Final Review : " + selected_rev.getStars());
+        }
 
        // holder.viewmore.setText(Html.fromHtml(text+"<font color='red'> <u>View More</u></font>"));
 

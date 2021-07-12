@@ -81,7 +81,7 @@ public class recycler_Adpter_HORIZONTAL extends RecyclerView.Adapter<recycler_Ad
 
                             AppCompatActivity activity = (AppCompatActivity) context;
                             The_book_Fragment_overview myFragment = new The_book_Fragment_overview(selected_book_acount);
-                            activity.getSupportFragmentManager().beginTransaction().add(R.id.mail_countener1, myFragment).addToBackStack(null).commit();
+                            activity.getSupportFragmentManager().beginTransaction().replace(R.id.mail_countener1, myFragment).addToBackStack(null).commit();
 
                             Log.d("adpterwork", "onClick: yes");
 
